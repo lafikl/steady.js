@@ -22,6 +22,7 @@
     this._addScrollY();
     this._onScroll();
     this._addBottom();
+    this._addWidth();
 
   }
 
