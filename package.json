@@ -1,0 +1,11 @@
+{
+  "name": "Steady",
+  "version": "0.0.0",
+  "description": "A module to track onscroll without performance regressions with a media-query like conditions.",
+  "main": "Steady.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Khalid Lafi",
+  "license": "MIT"
+}
