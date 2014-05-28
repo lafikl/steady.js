@@ -1,7 +1,7 @@
 Steady.js
 =========
 
-A module to do some logic on the `onscroll` event without performance regressions in a @media-query like conditions.
+A module to do some logic one the `onscroll` event without performance regressions in a @media-query like conditions.
 
 
 
@@ -75,6 +75,8 @@ function fn(values, done) {
 }
 ```
 
+see other examples in the [examples directory](https://github.com/lafikl/steady.js/tree/master/examples)
+
 
 # Installation
 
@@ -83,10 +85,8 @@ function fn(values, done) {
 npm install steady
 ```
 
-### Component
-```
-component install lafikl/steady
-```
+or you can [download it](https://github.com/lafikl/steady.js/archive/master.zip)
+
 
 
 _____
