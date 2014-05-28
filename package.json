@@ -1,7 +1,7 @@
 {
   "name": "steady",
-  "version": "0.0.0",
-  "description": "A module to do some logic one the `onscroll` event without performance regressions in a @media-query like conditions.",
+  "version": "0.0.1",
+  "description": "A module to do some logic on the `onscroll` event without performance regressions in a @media-query like conditions.",
   "main": "Steady.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
