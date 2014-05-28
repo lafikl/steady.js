@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hello</title>
+
+  <script type="text/javascript" src="../Steady.js"></script>
+  <script>
+    var s = new Steady({
+      throttle: 100,
+      handler: fn
+    });
+
+    s.addTracker('#head-top', function(window) {
+      var rect = document.getElementById('head').getBoundingClientRect();
+      return rect.top;
+    });
+
+
+    s.addCondition('min-#head-top', 0);
+    s.addCondition('max-#head-top', 200);
+
+    function fn(values, done) {
+      console.log(values);
+
+      var head = document.getElementById('head');
+      var color = head.style.color;
+      if ( color !== 'red' ) head.style.color = 'red';
+      done();
+    }
+
+  </script>
+
+  <style>
+    body {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 500%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="head"><h1>hello</h1></div>
+
+
+</body>
+</html>
