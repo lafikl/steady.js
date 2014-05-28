@@ -6,15 +6,15 @@
   <script type="text/javascript" src="../Steady.js"></script>
   <script>
     var s = new Steady({
-      conditions: {
-        'max-bottom': 500
-      },
       throttle: 100,
       handler: fn
     });
 
+    s.addCondition('max-bottom', 500);
+    s.addCondition('min-scrollY', 500);
+    s.addCondition('scrollX', 0);
 
-    function fn(values, cb) {
+    function fn(values, done) {
       console.log('req');
       setTimeout(function() {
         var xhr = new XMLHttpRequest();
@@ -24,7 +24,7 @@
         if ( xhr.readyState == 4 ) {
           document.body.innerHTML += xhr.response;
           
-          cb();
+          done();
         }
       };
 

@@ -7,6 +7,7 @@ var s = new Steady({
 });
 
 
-function fn(values) {
+function fn(values, done) {
   console.log(values);
+  done();
 }
