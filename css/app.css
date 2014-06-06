@@ -500,3 +500,47 @@ a {
   border-radius: 5px;
   padding: 10px 20px;
 }
+
+
+.st-loading {
+  position: fixed;
+  z-index: 999;
+  top: 15%;
+  text-shadow: #fff 5px 5px 5px;
+}
+
+.an-animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.an-animated.an-infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+@-webkit-keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.an-flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+}

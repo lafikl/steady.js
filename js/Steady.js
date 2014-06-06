@@ -8,7 +8,7 @@ function Steady(opts) {
   this.values    = {};
   this.tracked   = {};
   this.success   = false;
-  this.throttle = opts.throttle || 100;
+  this.throttleVal = opts.throttle || 100;
   this.processing = false;
 
 
@@ -132,7 +132,7 @@ Steady.prototype._onScroll = function() {
   var self = this;
   
 
-  window.onscroll = this._throttle(function(e) {
+  window.onscroll = this.throttle(function(e) {
 
     if ( !self._wantedTrackers.length || self.processing ) return;
     
@@ -144,13 +144,13 @@ Steady.prototype._onScroll = function() {
     }
     
     window.requestAnimationFrame(self._check.bind(self));
-  }, this.throttle);
+  }, this.throttleVal);
 
 };
 
 
 // i use it to avoid calling the onscroll function many times.
-Steady.prototype._throttle = function(fn, delay) {
+Steady.prototype.throttle = function(fn, delay) {
   var timer;
 
   return function () {

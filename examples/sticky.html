@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Steady.js</title>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="../css/app.css">
+</head>
+<body class="sticky">
+  <div class="sticky-header">
+    <div class="st-container">
+
+      <div id="st-header">
+          <h1 class="st-header-title">Steady.js</h1>
+          <p class="st-header-body">A jank-free module to do logic on the <code>onscroll</code> event without performance regressions in a @media-query like conditions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="st-container">
+    <div class="st-part">
+        <h2 class="st-part__title">How does it work?</h2>
+        <p>Steady main goal is to make the user scrolling <a href="http://jankfree.org">jank-free</a>, below is an explaination on how steady is working under the hood</p>
+        <ol>
+          <li>First steady attaches a handler to the <code>onscroll</code> event, that excutes the trackers ( collecting numbers only )</li>
+          <li>Then it calls another function that checks the conditions with values inside a <code>requestAnimationFrame</code> to avoid making the <code>onscroll</code> hanlder fat and slow, which will jank our scrolling</li>
+          <li>After that check function tries to see if the conditions are met? if they're met it calls the handler with the values and the done function, otherwise it does nothing.</li>
+          <li>When the handler is called, steady stops collecting values until the <code>done</code> callback is called by the handler. Which will help you when you do async stuff.</li>
+
+        </ol>
+    </div>
+
+
+    <div class="st-part">
+      <small>By Khalid Lafi / <a href="#">@LafiKL</a></small>
+      <ul class="st-footer-stuff">
+        <li class="st-tweet"><a href="https://twitter.com/intent/tweet?text=hello this is awesome" target="_blank">Tweet</a></li>
+        <li><a href="https://github.com/lafikl/steady.js">Source Code</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

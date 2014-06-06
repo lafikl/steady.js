@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hello</title>
+
+  <link rel="stylesheet" type="text/css" href="../css/app.css">
+
+</head>
+<body>
+
+
+
+  <h1 class="st-loading an-animated an-infinite an-flash">Loading...</h1>
+
+  <script id="template" type="text/x-handlebars-template">
+
+    
+    <div class="st-part">
+        <h2 class="st-part__title">Results from Github // Page #{{page}}</h2>
+        {{#each items}}
+          <h3>{{name}}</h3>
+        {{/each}}
+        
+    </div>
+  </script>
+  <script type="text/javascript" src="../js/handlebars.js"></script>
+  <script type="text/javascript" src="../js/Steady.js"></script>
+  <script>
+
+    var page = 1;
+
+    var link = 'https://api.github.com/search/repositories?q=scroll+language:javascript&per_page=30&page=';
+    var loadingEl = document.getElementsByClassName('st-loading')[0];
+    var xhr = new XMLHttpRequest();
+
+    var source = document.getElementById('template').innerText;
+    var template = Handlebars.compile(source);
+
+    xhr.open('GET',  link + page);
+    xhr.onreadystatechange = function() {
+      if ( xhr.readyState == 4 ) {
+
+        console.log('hooo')
+        loadingEl.style.display = "none";
+        var data = template( { page: page, items: ( JSON.parse(xhr.response) ).items});
+        document.body.innerHTML += data;
+        page++;
+      }
+    };
+
+    xhr.send();
+    var s = new Steady({
+      throttle: 100,
+      handler: fn
+    });
+
+    s.addCondition('max-bottom', 200);
+    s.addCondition('min-scrollY', 200);
+    s.addCondition('scrollX', 0);
+
+    function fn(values, done) {      
+      var xhr = new XMLHttpRequest();
+
+
+
+      xhr.open('GET', link + page);
+      loadingEl.style.display = "block";
+      xhr.onreadystatechange = function() {
+        if ( xhr.readyState == 4 ) {
+          
+          var data = template( { page: page, items: ( JSON.parse(xhr.response) ).items } );
+          document.body.innerHTML += data;
+          page++;
+          loadingEl.style.display = "none";
+          done();
+        }
+      };
+
+      xhr.send();
+    
+    }
+
+  </script>
+</body>
+</html>
