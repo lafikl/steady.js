@@ -8,7 +8,7 @@ function Steady(opts) {
   this.values    = {};
   this.tracked   = {};
   this.success   = false;
-  this.throttle = opts.throttle || 100;
+  this.throttleVal = opts.throttle || 100;
   this.processing = false;
 
 
@@ -144,7 +144,7 @@ Steady.prototype._onScroll = function() {
     }
     
     window.requestAnimationFrame(self._check.bind(self));
-  }, this.throttle);
+  }, this.throttleVal);
 
 };
 
