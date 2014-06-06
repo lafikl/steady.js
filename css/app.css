@@ -435,6 +435,10 @@ body {
   padding: 80px;
 }
 
+a {
+  color: #08c;
+}
+
 .st-header-title {
   font-weight: 200;
   font-size: 2.3em;
@@ -465,16 +469,34 @@ body {
   list-style: square;
   padding-left: 15px;
 }
-.st-part li code {
+.st-part li ul {
   font-size: 0.85em;
 }
 
-.st-part > ul li {
+.st-part > ul li, .st-part > ol li {
   line-height: 1.8em;
   margin-bottom: 10px;
 }
 
-.st-part > ul li a {
-  color: #08c;
+.st-part > ul li a, .st-part > ol li a {
   text-decoration: none;
+}
+
+.st-footer-stuff {
+  list-style: none;
+  margin: 0;
+  float: right;
+}
+.st-footer-stuff li {
+  display: inline-block;
+  margin-left: 20px;
+}
+.st-tweet a {
+  /*background: #f9f9f9;*/
+  border: 2px solid #f5f5f5;
+  /*border-bottom-color: rgba( 1, 1, 1, 0.15 );*/
+  color: #08c;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px 20px;
 }

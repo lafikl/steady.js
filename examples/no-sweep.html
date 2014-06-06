@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hello</title>
+
+  <script>
+    window.onscroll = fn;
+
+
+    function fn(values) {
+      
+      if ( window.scrollY > 500 ) return;
+
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'imgs.html');
+      xhr.onreadystatechange = function() {
+        console.log(xhr);
+        if ( xhr.readyState == 4 ) {
+          window.requestAnimationFrame(function() { document.body.innerHTML += xhr.response; });
+        }
+      };
+
+      xhr.send();
+    }
+
+
+  </script>
+
+  <style>
+    body {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 500%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+
+</body>
+</html>

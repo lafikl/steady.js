@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hello</title>
+
+  <style>
+    body {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 500%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+
+  
+  
+  <script id="template" type="text/x-handlebars-template">
+    {{#each}}
+      {{name}}
+    {{/each}}
+  </script>
+  <script type="text/javascript" src="../js/handlebars.js"></script>
+  <script type="text/javascript" src="../js/Steady.js"></script>
+  <script>
+
+    var xhr = new XMLHttpRequest();
+
+    var source = document.getElementById('template').innerText;
+    var template = Handlebars.compile(source);
+
+    xhr.open('GET', 'https://api.github.com/search/repositories?q=scroll+language:javascript&per_page=30');
+    xhr.onreadystatechange = function() {
+      if ( xhr.readyState == 4 ) {
+        console.log(JSON.parse(xhr.response));
+        var data = template((JSON.parse(xhr.response)).items);
+        document.body.innerHTML += data;
+        done();
+      }
+    };
+
+    xhr.send();
+    var s = new Steady({
+      throttle: 100,
+      handler: fn
+    });
+
+    s.addCondition('max-bottom', 500);
+    s.addCondition('min-scrollY', 500);
+    s.addCondition('scrollX', 0);
+
+    function fn(values, done) {      
+      var xhr = new XMLHttpRequest();
+
+
+
+      xhr.open('GET', 'imgs.html');
+      xhr.onreadystatechange = function() {
+        if ( xhr.readyState == 4 ) {
+          
+          var data = template((JSON.parse(xhr.response)).items);
+          document.body.innerHTML += data;
+          done();
+        }
+      };
+
+      xhr.send();
+    
+    }
+
+  </script>
+</body>
+</html>
