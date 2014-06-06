@@ -14,6 +14,18 @@
     </div>
 
     <div class="st-part">
+        <h2 class="st-part__title">How does it work?</h2>
+        <p>Steady main goal is to make the user scrolling <a href="http://jankfree.org">jank-free</a>, below is an explaination on how steady is working under the hood</p>
+        <ol>
+          <li>First steady attaches a handler to the <code>onscroll</code> event, that excutes the trackers ( collecting numbers only )</li>
+          <li>Then it calls another function that checks the conditions with values inside a <code>requestAnimationFrame</code> to avoid making the <code>onscroll</code> hanlder fat and slow, which will jank our scrolling</li>
+          <li>After that check function tries to see if the conditions are met? if they're met it calls the handler with the values and the done function, otherwise it does nothing.</li>
+          <li>When the handler is called, steady stops collecting values until the <code>done</code> callback is called by the handler. Which will help you when you do async stuff.</li>
+
+        </ol>
+    </div>
+
+    <div class="st-part">
         <h2 class="st-part__title">Features</h2>
         <ul>
           <li>Tiny <code>onscroll</code> handler, that collect values only offloading the computations to <code>requestAnimationFrame</code>
@@ -23,10 +35,11 @@
           </li>
           <li>Built-in trackers: 
             <ul>
-              <li> <code>bottom</code>: </li>
-              <li> <code>scrollY</code>:</li>
-              <li> <code>scrollX</code>:</li>
-              <li> <code>width</code>:</li>
+              <li> <code>bottom</code>: you can use it to check did the user reach the bottom of the page yet? ( e.g. before reaching the end of the page by 200px start loading new content )</li>
+              <li> <code>scrollY</code>: how much did he scroll down?</li>
+              <li> <code>scrollX</code>: how much did he scroll vertically? cuz vertical designs are the new hotness right?</li>
+              <li> <code>width</code>: viewport width, since your logic might change based on the viewport size</li>
+              <li>...and you can build your own trackers very easily!</li>
             </ul>
           </li>
           <li>Extendable trackers, you can simply roll your own trackers.</li>
@@ -34,21 +47,51 @@
     </div>
 
     <div class="st-part">
-        <h2 class="st-part__title">Use Cases</h2>
+        <!-- <h2 class="st-part__title">Quick start</h2> -->
+
+        <h3>Steady(options)</h3>
+        <h4>options:</h4>
         <ul>
-          <li>Lazy loader for images or content</li>
-          <li>Infinite scroll</li>
-          <li>Changing the layout based on your scroll position ( sticky headers ).</li>
-          <li>...and anything that requires listening on the <code>onscroll</code> event.</li>
+          <li><code>conditions</code> (<b>Object</b>): this is a key/value object that you define your rules for the trackers in, all trackers have <code>min</code> and <code>max</code> suffix out of the box. It's like @media-query but for <code>onscroll</code> event</li>
+          <li><code>handler</code> (<b>Function</b>): a handler that gets called when the conditions are met, with two parameters:
+            <ol>
+              <li><code>values</code> (<b>Object</b>): contains a key/value object, where the key is the name of the tracker and the value is it's value.
+              </li>
+              <li><code>done</code> (<b>Function</b>): a function that you call when you're done processing, this way you can make sure that your handler can't be call again while you process an async thingy <i>( e.g. waiting for an AJAX request to finish )</i>.</li>
+            </ol>
+          </li>
+          <li><code>throttle</code> (<b>Number</b>): the timeout delay in milliseconds, it's used to avoid calling the Steady onscroll handler more than we need to. Defaults to 100 ms</li>
         </ul>
+        
     </div>
 
     <div class="st-part">
-      <h2 class="st-part__title">Usage and Examples</h2>
+        <h2 class="st-part__title">Basic usage</h2>
+        <script src="https://gist.github.com/lafikl/8dfd7b25524d5afb8f7e.js"></script>
+        
+    </div>
+
+    <div class="st-part">
+        <h2 class="st-part__title">Custom trackers</h2>
+        <script src="https://gist.github.com/lafikl/470e6f24513c82b60f44.js"></script>
+        
+    </div>
+
+
+    <div class="st-part">
+      <h2 class="st-part__title">Demo</h2>
       <ul>
-        <li><a href="#">infinite Scroll</a></li>
-        <li><a href="#">Images Lazy loader</a></li>
-        <li><a href="#">Custom Tracker</a></li>
+        <li><a href="examples/infinite.html">Infinite scroll</a></li>
+        <li><a href="examples/sticky.html">Sticky header</a></li>
+        <li>Be creative!</li>
+      </ul>
+    </div>
+
+    <div class="st-part">
+      <small>By Khalid Lafi / <a href="#">@LafiKL</a></small>
+      <ul class="st-footer-stuff">
+        <li class="st-tweet"><a href="https://twitter.com/intent/tweet?text=hello this is awesome" target="_blank">Tweet</a></li>
+        <li><a href="https://github.com/lafikl/steady.js">Source Code</a></li>
       </ul>
     </div>
   </div>
