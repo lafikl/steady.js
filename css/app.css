@@ -554,3 +554,25 @@ a {
   color: #444;
 
 }
+.st-github-star {
+  background: transparent;
+  border: 2px solid #ededed;
+  text-decoration: none;
+  color: #777;
+  font-weight: 200;
+}
+.st-getStarted, .st-github-star {
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 15px;
+  padding: 10px 20px;
+  display: inline-block;
+
+  text-decoration: none;
+}
+
+.st-getStarted {
+  color: #08c;
+  font-weight: 400;
+  border: 2px solid #ededed;
+}
