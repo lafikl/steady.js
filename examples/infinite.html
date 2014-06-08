@@ -33,7 +33,7 @@
     var loadingEl = document.getElementsByClassName('st-loading')[0];
     var xhr = new XMLHttpRequest();
 
-    var source = document.getElementById('template').innerText;
+    var source = document.getElementById('template').innerHTML;
     var template = Handlebars.compile(source);
 
     xhr.open('GET',  link + page);
