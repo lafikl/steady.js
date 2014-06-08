@@ -168,8 +168,6 @@ Steady.prototype.throttle = function(fn, delay) {
 };
 
 
-if ( window ) {
-  window.Steady = Steady;
-} else {
+if (typeof module === 'object' && module.exports) {
   module.exports = Steady;
-}
+} 
