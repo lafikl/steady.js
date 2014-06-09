@@ -1,6 +1,6 @@
 function Steady(opts) {
   if ( !opts ) throw new Error('missing options');
-  if ( !opts.handler ) throw new Error('missing hanlder parameter');
+  if ( !opts.handler ) throw new Error('missing handler parameter');
 
 
   this.conditions = opts.conditions || {};
