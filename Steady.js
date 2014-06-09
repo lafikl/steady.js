@@ -3,6 +3,7 @@ function Steady(opts) {
   if ( !opts.handler ) throw new Error('missing handler parameter');
 
 
+  this.scrollElement = opts.scrollElement || window;
   this.conditions = opts.conditions || {};
   this.handler   = opts.handler;
   this.values    = {};
@@ -132,7 +133,7 @@ Steady.prototype._onScroll = function() {
   var self = this;
   
 
-  window.onscroll = this.throttle(function(e) {
+  this.scrollElement.onscroll = this.throttle(function(e) {
 
     if ( !self._wantedTrackers.length || self.processing ) return;
     
