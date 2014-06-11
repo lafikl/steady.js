@@ -576,3 +576,8 @@ a {
   font-weight: 400;
   border: 2px solid #ededed;
 }
+
+.scrollable {
+  overflow: scroll;
+  height: 600px;
+}

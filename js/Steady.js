@@ -1,8 +1,9 @@
 function Steady(opts) {
   if ( !opts ) throw new Error('missing options');
-  if ( !opts.handler ) throw new Error('missing hanlder parameter');
+  if ( !opts.handler ) throw new Error('missing handler parameter');
 
 
+  this.scrollElement = opts.scrollElement || window;
   this.conditions = opts.conditions || {};
   this.handler   = opts.handler;
   this.values    = {};
@@ -13,11 +14,20 @@ function Steady(opts) {
 
 
   this._parse();
-  this._addScrollX();
-  this._addScrollY();
-  this._onScroll();
-  this._addBottom();
+
+  if ( this.scrollElement.hasOwnProperty('scrollY') ) {
+    console.log('hiii');
+    this._addBottom();
+    this._addScrollX();
+    this._addScrollY();
+  } else {
+    this._addBottomEl();
+    this._addScrollTop();
+    this._addScrollLeft();
+  }
+
   this._addWidth();
+  this._onScroll();
 
 }
 
@@ -51,6 +61,31 @@ Steady.prototype._addBottom = function() {
       document.documentElement.offsetHeight
     );
     return height - (window.scrollY + window.innerHeight);
+  });
+};
+
+Steady.prototype._addBottomEl = function() {
+  var self = this;
+  this.addTracker('bottom', function(window) {
+    var height = Math.max(
+      self.scrollElement.scrollHeight,
+      self.scrollElement.offsetHeight
+    );
+    return height - ( self.scrollElement.scrollTop + self.scrollElement.offsetHeight);
+  });
+};
+
+Steady.prototype._addScrollTop = function() {
+  var self = this;
+  this.addTracker('scrollTop', function(window) {
+    return self.scrollElement.scrollTop;
+  });
+};
+
+Steady.prototype._addScrollLeft = function() {
+  var self = this;
+  this.addTracker('scrollLeft', function(window) {
+    return self.scrollElement.scrollLeft;
   });
 };
 
@@ -89,17 +124,6 @@ Steady.prototype._parse = function() {
   }
 };
 
-Steady.prototype._checkPageHeight = function() {
-  return Math.max(
-    document.body.scrollHeight,
-    document.body.offsetHeight, 
-    document.documentElement.clientHeight,
-    document.documentElement.scrollHeight,
-    document.documentElement.offsetHeight
-  );
-};
-
-
 Steady.prototype._check = function() {
   var results = [];
   
@@ -132,7 +156,7 @@ Steady.prototype._onScroll = function() {
   var self = this;
   
 
-  window.onscroll = this.throttle(function(e) {
+  this.scrollElement.onscroll = this.throttle(function(e) {
 
     if ( !self._wantedTrackers.length || self.processing ) return;
     
@@ -168,8 +192,6 @@ Steady.prototype.throttle = function(fn, delay) {
 };
 
 
-if ( window ) {
-  window.Steady = Steady;
-} else {
+if (typeof module === 'object' && module.exports) {
   module.exports = Steady;
-}
+} 

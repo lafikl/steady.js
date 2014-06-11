@@ -39,10 +39,12 @@
           </li>
           <li>Built-in trackers: 
             <ul>
-              <li> <code>bottom</code>: you can use it to check did the user reach the bottom of the page yet? ( e.g. before reaching the end of the page by 200px start loading new content )</li>
-              <li> <code>scrollY</code>: how much did he scroll down?</li>
-              <li> <code>scrollX</code>: how much did he scroll horizontally? cuz horizontal designs are the new hotness right?</li>
+              <li> <code>bottom</code>: you can use it to check did the user reach the bottom of the page yet? ( e.g. before reaching the end of the page by 200px start loading new content ). And it works of the scrollable elements and window!</li>
+              <li> <code>scrollY</code>: how much did he scroll the window down? This is for window only.</li>
+              <li> <code>scrollX</code>: how much did he scroll the window horizontally? cuz horizontal designs are the new hotness right? This is for window only.</li>
               <li> <code>width</code>: viewport width, since your logic might change based on the viewport size</li>
+              <li><code>scrollTop</code>: this is for scrollable elements, that collects how much did you scroll from the top of the element.</li>
+              <li><code>scrollTop</code>: this is for scrollable elements only, that collects how much did you scroll from the top of the element.</li>
               <li>...and you can build your own trackers very easily!</li>
             </ul>
           </li>
@@ -51,7 +53,6 @@
     </div>
 
     <div class="st-part">
-        <!-- <h2 class="st-part__title">Quick start</h2> -->
 
         <h3>Steady(options)</h3>
         <h4>options:</h4>
@@ -64,7 +65,8 @@
               <li><code>done</code> (<b>Function</b>): a function that you call when you're done processing, this way you can make sure that your handler can't be call again while you process an async thingy <i>( e.g. waiting for an AJAX request to finish )</i>.</li>
             </ol>
           </li>
-          <li><code>throttle</code> (<b>Number</b>): the timeout delay in milliseconds, it's used to avoid calling the Steady onscroll handler more than we need to. Defaults to 100 ms</li>
+          <li><code>[scrollElement]</code>(<b>HTML Element</b>): it gives you the ability to run Steady on a scrollable element instead of window. This property is optional that defaults to <code>window</code>. <a href="examples/scrollable.html">Demo</a></li>
+          <li><code>[throttle]</code> (<b>Number</b>): the timeout delay in milliseconds, it's used to avoid calling the Steady onscroll handler more than we need to. This property is optional that defaults to 100 ms</li>
         </ul>
         
     </div>
@@ -78,7 +80,11 @@
     <div class="st-part">
         <h2 class="st-part__title">Custom trackers</h2>
         <script src="https://gist.github.com/lafikl/470e6f24513c82b60f44.js"></script>
-        
+    </div>
+
+    <div class="st-part">
+        <h2 class="st-part__title">Scrollable element</h2>
+        <script src="https://gist.github.com/lafikl/cf088bbf02798c66b0f5.js"></script>
     </div>
 
 
@@ -86,6 +92,7 @@
       <h2 class="st-part__title">Demo</h2>
       <ul>
         <li><a href="examples/infinite.html">Infinite scroll</a></li>
+        <li><a href="examples/scrollable.html">Scrollable element</a></li>
         <li>Be creative!</li>
       </ul>
     </div>
