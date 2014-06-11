@@ -1,7 +1,7 @@
 Steady.js
 =========
 
-([Documentation](http://lafikl.github.io/steady.js)
+[Documentation](http://lafikl.github.io/steady.js)
 
 
 _____

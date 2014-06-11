@@ -1,6 +1,6 @@
 {
   "name": "steady",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A module to do some logic on the `onscroll` event without performance regressions in a @media-query like conditions.",
   "main": "Steady.js",
   "homepage": "https://github.com/lafikl/steady.js",
