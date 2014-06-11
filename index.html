@@ -10,7 +10,7 @@
   <div class="st-container">
     <div id="st-header">
         <h1 class="st-header-title">Steady.js</h1>
-        <p class="st-header-body">A jank-free module to do logic on the <code>onscroll</code> event without performance regressions in a @media-query like conditions.</p>
+        <p class="st-header-body">A jank-free module to do logic on the <code>onscroll</code> event without performance regressions in @media-query like conditions.</p>
 
         <a href="#getStarted" class="st-getStarted">Get Started</a>
         <a href="#install" class="st-github-star">Install</a>
@@ -19,12 +19,12 @@
 
     <div class="st-part" id="getStarted">
         <h2 class="st-part__title">How does it work?</h2>
-        <p>Steady main goal is to make the user scrolling <a href="http://jankfree.org">jank-free</a>, below is an explaination on how steady is working under the hood</p>
+        <p>Steady's main goal is to make the user scrolling <a href="http://jankfree.org">jank-free</a>. Below is an explaination on how Steady is working under the hood:</p>
         <ol>
-          <li>First steady attaches a handler to the <code>onscroll</code> event, that excutes the trackers ( collecting numbers only )</li>
-          <li>Then it calls another function that checks the conditions with values inside a <code>requestAnimationFrame</code> to avoid making the <code>onscroll</code> hanlder fat and slow, which will jank our scrolling</li>
-          <li>After that check function tries to see if the conditions are met? if they're met it calls the handler with the values and the done function, otherwise it does nothing.</li>
-          <li>When the handler is called, steady stops collecting values until the <code>done</code> callback is called by the handler. Which will help you when you do async stuff.</li>
+          <li>First, Steady attaches a handler to the <code>onscroll</code> event, that excutes the trackers (collecting numbers only).</li>
+          <li>Then it calls another function that checks the conditions with values inside a <code>requestAnimationFrame</code> to avoid making the <code>onscroll</code> handler fat and slow, which will jank our scrolling.</li>
+          <li>After that check, the function tries to see if the conditions are met. If they're met, it calls the handler with the values and the done function, otherwise it does nothing.</li>
+          <li>When the handler is called, Steady stops collecting values until the <code>done</code> callback is called by the handler. This will help you when you do async stuff.</li>
 
         </ol>
     </div>
@@ -32,10 +32,10 @@
     <div class="st-part">
         <h2 class="st-part__title">Features</h2>
         <ul>
-          <li>Tiny <code>onscroll</code> handler, that collect values only offloading the computations to <code>requestAnimationFrame</code>
+          <li>Tiny <code>onscroll</code> handler that collect values only, offloading the computations to <code>requestAnimationFrame</code>.
           </li>
           <li>Throttling <code>onscroll</code> handler to avoid calling it more than what we need.</li>
-          <li>Simple and reusable trackers that works like <code>@media-query</code>
+          <li>Simple and reusable trackers that works like <code>@media-query</code>.
           </li>
           <li>Built-in trackers: 
             <ul>
@@ -54,15 +54,15 @@
 
     <div class="st-part">
 
-        <h3>Steady(options)</h3>
-        <h4>options:</h4>
+        <h3>Steady (options)</h3>
+        <h4>Options:</h4>
         <ul>
-          <li><code>conditions</code> (<b>Object</b>): this is a key/value object that you define your rules for the trackers in, all trackers have <code>min</code> and <code>max</code> suffix out of the box. It's like @media-query but for <code>onscroll</code> event</li>
+          <li><code>conditions</code> (<b>Object</b>): this is a key/value object that defines rules for the trackers. All trackers have <code>min</code> and <code>max</code> suffix out of the box. It's like <code>@media-query</code> but for <code>onscroll</code> event</li>
           <li><code>handler</code> (<b>Function</b>): a handler that gets called when the conditions are met, with two parameters:
             <ol>
               <li><code>values</code> (<b>Object</b>): contains a key/value object, where the key is the name of the tracker and the value is it's value.
               </li>
-              <li><code>done</code> (<b>Function</b>): a function that you call when you're done processing, this way you can make sure that your handler can't be call again while you process an async thingy <i>( e.g. waiting for an AJAX request to finish )</i>.</li>
+              <li><code>done</code> (<b>Function</b>): a function that you call when you're done processing, this way you can make sure that your handler can't be called again while you process an async thingy <i>( e.g. waiting for an AJAX request to finish )</i>.</li>
             </ol>
           </li>
           <li><code>[scrollElement]</code>(<b>HTML Element</b>): it gives you the ability to run Steady on a scrollable element instead of window. This property is optional that defaults to <code>window</code>. <a href="examples/scrollable.html">Demo</a></li>
