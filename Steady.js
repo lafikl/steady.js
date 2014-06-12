@@ -16,7 +16,6 @@ function Steady(opts) {
   this._parse();
 
   if ( this.scrollElement.hasOwnProperty('scrollY') ) {
-    console.log('hiii');
     this._addBottom();
     this._addScrollX();
     this._addScrollY();
