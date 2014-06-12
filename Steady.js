@@ -18,40 +18,37 @@ function Steady(opts) {
 
   if ( this.scrollElement.hasOwnProperty('scrollY') ) {
     this._addBottom();
-    this._addScrollX();
-    this._addScrollY();
+    this._addPropertyTracker("scrollX");
+    this._addPropertyTracker("scrollY");
   } else {
     this._addBottomEl();
-    this._addScrollTop();
-    this._addScrollLeft();
+    this._addPropertyTracker("scrollTop");
+    this._addPropertyTracker("scrollLeft");
   }
 
-  this._addWidth();
+  this._addPropertyTracker("width", "innerWidth");
   this._onScroll();
 
 }
-
 
 Steady.prototype.addCondition = function(name, value) {
   this.conditions[name] = value;
   this._parse();
 };
+
 Steady.prototype.removeCondition = function(name) {
   delete this.conditions[name];
   this._parse();
 };
+
 Steady.prototype.addTracker  = function(name, fn) {
   this.tracked[name] = { cb: fn, name: name};
 };
 
-Steady.prototype._addScrollX = function() {
-  this.addTracker('scrollX', function(window) {
-    return window.scrollX;
-  });
-};
-Steady.prototype._addScrollY = function() {
-  this.addTracker('scrollY', function(window) {
-    return window.scrollY;
+Steady.prototype._addPropertyTracker = function(trackerName, propertyName) {
+  propertyName = propertyName || trackerName;
+  this.addTracker(trackerName, function(el) {
+    return el[propertyName];
   });
 };
 
@@ -70,35 +67,14 @@ Steady.prototype._addBottom = function() {
 
 Steady.prototype._addBottomEl = function() {
   var self = this;
-  this.addTracker('bottom', function(window) {
+  this.addTracker('bottom', function(el) {
     var height = Math.max(
-      self.scrollElement.scrollHeight,
-      self.scrollElement.offsetHeight
+      el.scrollHeight,
+      el.offsetHeight
     );
-    return height - ( self.scrollElement.scrollTop + self.scrollElement.offsetHeight);
+    return height - ( el.scrollTop + el.offsetHeight);
   });
 };
-
-Steady.prototype._addScrollTop = function() {
-  var self = this;
-  this.addTracker('scrollTop', function(window) {
-    return self.scrollElement.scrollTop;
-  });
-};
-
-Steady.prototype._addScrollLeft = function() {
-  var self = this;
-  this.addTracker('scrollLeft', function(window) {
-    return self.scrollElement.scrollLeft;
-  });
-};
-
-Steady.prototype._addWidth = function() {
-  this.addTracker('width', function(window) {
-    return window.innerWidth;
-  });
-};
-
 
 Steady.prototype._parse = function() {
   this._parsed = {};
@@ -171,7 +147,7 @@ Steady.prototype._throttledHandler = function() {
 
       if ( !self.tracked[self._wantedTrackers[i]] ) continue;
 
-      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(window);
+      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(self.scrollElement || window);
     }
     
     window.requestAnimationFrame(self._check.bind(self));
