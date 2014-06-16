@@ -1,8 +1,12 @@
 function Steady(opts) {
   if ( !opts ) throw new Error('missing options');
   if ( !opts.handler ) throw new Error('missing handler parameter');
+  if ( opts.conditionsMode && 
+       opts.conditionsMode !== 'all' && 
+       opts.conditionsMode !== 'any' ) throw new Error('The conditionsMode parameter must be "all" or "any"');
 
 
+  this.conditionsMode = opts.conditionsMode || 'all';
   this.scrollElement = opts.scrollElement || window;
   this.conditions = opts.conditions || {};
   this.handler   = opts.handler;
@@ -144,7 +148,10 @@ Steady.prototype._check = function() {
     }
   }
 
-  if ( results.length && results.indexOf(false) == -1 ) {
+  if ( results.length && 
+    (( this.conditionsMode === 'all' && results.indexOf(false) == -1 ) ||
+     ( this.conditionsMode === 'any'  && results.indexOf(true) >= 0 )) 
+  ) {
     this.processing = true;
 
     var cb = this._done.bind(this);
