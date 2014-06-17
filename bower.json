@@ -1,0 +1,21 @@
+{
+  "name": "steady",
+  "main": "Steady.js",
+  "version": "0.3.0",
+  "homepage": "http://lafikl.github.io/steady.js/",
+  "authors": [
+    "Khalid Lafi"
+  ],
+  "description": "A module to do some logic on the `onscroll` event without performance regressions in a @media-query like conditions.",
+  "keywords": [
+    "scroll"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
