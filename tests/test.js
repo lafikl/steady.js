@@ -68,14 +68,13 @@ QUnit.asyncTest('test resume method', function(assert) {
         
         setTimeout(function() {
           assert.equal(runs, 2, 'resume method runs should equal 2' );
+          s.stop();
           QUnit.start();
         }, 200);
       }, 200);
 
     }, 20);
   });
-  
-  
 });
 
 QUnit.asyncTest('test addCondition', function(assert) {
