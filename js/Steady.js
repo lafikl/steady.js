@@ -16,15 +16,17 @@ function Steady(opts) {
 
   this._parse();
 
-  if ( 'scrollY' in this.scrollElement ) {
-    this._addBottom();
-    this._addScrollX();
-    this._addScrollY();
-  } else {
-    this._addBottomEl();
-    this._addScrollTop();
-    this._addScrollLeft();
-  }
+  
+  this._addBottom();
+  this._addScrollX();
+  this._addScrollY();
+  this._addPageYOffset();
+  this._addPageXOffset();
+
+  this._addBottomEl();
+  this._addScrollTop();
+  this._addScrollLeft();
+  
 
   this._addWidth();
   this._onScroll();
