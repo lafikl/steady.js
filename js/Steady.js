@@ -16,17 +16,15 @@ function Steady(opts) {
 
   this._parse();
 
-  
-  this._addBottom();
-  this._addScrollX();
-  this._addScrollY();
-  this._addPageYOffset();
-  this._addPageXOffset();
-
-  this._addBottomEl();
-  this._addScrollTop();
-  this._addScrollLeft();
-  
+  if ( 'pageYOffset' in this.scrollElement ) {
+    this._addBottom();
+    this._addScrollX();
+    this._addScrollY();
+  } else {
+    this._addBottomEl();
+    this._addScrollTop();
+    this._addScrollLeft();
+  }
 
   this._addWidth();
   this._onScroll();
@@ -54,18 +52,6 @@ Steady.prototype._addScrollX = function() {
 Steady.prototype._addScrollY = function() {
   this.addTracker('scrollY', function(window) {
     return window.scrollY;
-  });
-};
-
-Steady.prototype._addPageYOffset = function() {
-  this.addTracker('pageYOffset', function(window) {
-    return window.pageYOffset;
-  });
-};
-
-Steady.prototype._addPageXOffset = function() {
-  this.addTracker('pageXOffset', function(window) {
-    return window.pageXOffset;
   });
 };
 
