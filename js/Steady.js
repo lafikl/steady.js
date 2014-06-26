@@ -55,6 +55,18 @@ Steady.prototype._addScrollY = function() {
   });
 };
 
+Steady.prototype._addPageYOffset = function() {
+  this.addTracker('pageYOffset', function(window) {
+    return window.pageYOffset;
+  });
+};
+
+Steady.prototype._addPageXOffset = function() {
+  this.addTracker('pageXOffset', function(window) {
+    return window.pageXOffset;
+  });
+};
+
 Steady.prototype._addBottom = function() {
   this.addTracker('bottom', function(window) {
     var height = Math.max(
@@ -64,7 +76,7 @@ Steady.prototype._addBottom = function() {
       document.documentElement.scrollHeight,
       document.documentElement.offsetHeight
     );
-    return height - (window.scrollY + window.innerHeight);
+    return height - (window.pageYOffset + window.innerHeight);
   });
 };
 
