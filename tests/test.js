@@ -7,7 +7,7 @@ QUnit.asyncTest('test stop method', function(assert) {
   console.log('runs', runs);
   var s = new Steady({
     conditions: {
-      'min-scrollY': 200,
+      'min-top': 200,
     },
     handler: function(values, done) {
       console.log(values);
@@ -42,7 +42,7 @@ QUnit.asyncTest('test resume method', function(assert) {
   console.log('runs', runs);
   var s = new Steady({
     conditions: {
-      'min-scrollY': 200,
+      'min-top': 200,
     },
     handler: function(values, done) {
       console.log(values);
@@ -89,12 +89,12 @@ QUnit.asyncTest('test addCondition', function(assert) {
     }
   });
 
-  s.addCondition('max-scrollY', 200);
+  s.addCondition('max-top', 200);
 
   s.stop();
 
   console.log(s);
-  assert.equal(s.conditions['max-scrollY'], 200, 'addCondition is okay' );
+  assert.equal(s.conditions['max-top'], 200, 'addCondition is okay' );
   QUnit.start();
 });
 
@@ -161,33 +161,16 @@ QUnit.asyncTest('test bottom tracker', function(assert) {
   window.scrollTo(0, to);
 });
 
-QUnit.asyncTest('test scrollX tracker', function(assert) {
+
+QUnit.asyncTest('test top tracker', function(assert) {
   expect(1);
   var s = new Steady({
     conditions: {
-      'scrollX': 0,
+      'min-top': 100,
     },
     handler: function(values, done) {
       console.log(values);
-      assert.equal(values.scrollX, 0, 'scrollX is okay' );
-      QUnit.start();
-      s.stop();
-      done();
-    }
-  });
-
-  window.scrollTo(0, 1);
-});
-
-QUnit.asyncTest('test scrollY tracker', function(assert) {
-  expect(1);
-  var s = new Steady({
-    conditions: {
-      'min-scrollY': 100,
-    },
-    handler: function(values, done) {
-      console.log(values);
-      assert.equal(values.scrollY >= 101, true, 'scrollX is okay' );
+      assert.equal(values.top >= 101, true, 'top is okay' );
       QUnit.start();
       s.stop();
       done();
@@ -198,17 +181,17 @@ QUnit.asyncTest('test scrollY tracker', function(assert) {
 });
 
 
-QUnit.asyncTest('test scrollElement scrollTop tracker', function(assert) {
+QUnit.asyncTest('test scrollElement top tracker', function(assert) {
   expect(1);
   var scrollable = document.getElementById('scrollable');
   var s = new Steady({
     conditions: {
-      'min-scrollTop': 100,
+      'min-top': 100,
     },
     scrollElement: scrollable,
     handler: function(values, done) {
       console.log(values);
-      assert.equal(values.scrollTop >= 101, true, 'scrollTop is okay' );
+      assert.equal(values.top >= 101, true, 'top is okay' );
       QUnit.start();
       s.stop();
       done();
