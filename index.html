@@ -39,12 +39,10 @@
           </li>
           <li>Built-in trackers: 
             <ul>
-              <li> <code>bottom</code>: you can use it to check did the user reach the bottom of the page yet? ( e.g. before reaching the end of the page by 200px start loading new content ). And it works of the scrollable elements and window!</li>
-              <li> <code>scrollY</code>: how much did he scroll the window down? This is for window only.</li>
-              <li> <code>scrollX</code>: how much did he scroll the window horizontally? cuz horizontal designs are the new hotness right? This is for window only.</li>
-              <li> <code>width</code>: viewport width, since your logic might change based on the viewport size</li>
-              <li><code>scrollTop</code>: this is for scrollable elements, that collects how much did you scroll from the top of the element.</li>
-              <li><code>scrollTop</code>: this is for scrollable elements only, that collects how much did you scroll from the top of the element.</li>
+              <li><code>bottom</code>: you can use it to check did the user reach the bottom of the page/element yet? ( e.g. before reaching the end of the page by 200px start loading new content ). And it works of the scrollable elements and window!</li>
+              <li><code>top</code>: how much did he scroll the window/element down?</li>
+              <li><code>width</code>: viewport width, since your logic might change based on the viewport size</li>
+              <li><code>scrollLeft</code>: this is for scrollable elements only, that collects how much did you scroll from the left of the element.</li>
               <li>...and you can build your own trackers very easily!</li>
             </ul>
           </li>

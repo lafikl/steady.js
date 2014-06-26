@@ -18,11 +18,10 @@ function Steady(opts) {
 
   if ( 'pageYOffset' in this.scrollElement ) {
     this._addBottom();
-    this._addScrollX();
-    this._addScrollY();
+    this._addTop();
   } else {
     this._addBottomEl();
-    this._addScrollTop();
+    this._addTopEl();
     this._addScrollLeft();
   }
 
@@ -44,28 +43,6 @@ Steady.prototype.addTracker  = function(name, fn) {
   this.tracked[name] = { cb: fn, name: name};
 };
 
-Steady.prototype._addScrollX = function() {
-  this.addTracker('scrollX', function(scrollable) {
-    return scrollable.scrollX;
-  });
-};
-Steady.prototype._addScrollY = function() {
-  this.addTracker('scrollY', function(scrollable) {
-    return scrollable.scrollY;
-  });
-};
-
-Steady.prototype._addScrollX = function() {
-  this.addTracker('scrollX', function(scrollable) {
-    return scrollable.scrollX;
-  });
-};
-Steady.prototype._addScrollY = function() {
-  this.addTracker('scrollY', function(scrollable) {
-    return scrollable.scrollY;
-  });
-};
-
 Steady.prototype._addBottom = function() {
   this.addTracker('bottom', function(scrollable) {
     var height = Math.max(
@@ -76,6 +53,12 @@ Steady.prototype._addBottom = function() {
       document.documentElement.offsetHeight
     );
     return height - (scrollable.pageYOffset + scrollable.innerHeight);
+  });
+};
+
+Steady.prototype._addTop = function() {
+  this.addTracker('top', function(scrollable) {
+    return scrollable.pageYOffset;
   });
 };
 
@@ -90,9 +73,8 @@ Steady.prototype._addBottomEl = function() {
   });
 };
 
-Steady.prototype._addScrollTop = function() {
-  var self = this;
-  this.addTracker('scrollTop', function(scrollable) {
+Steady.prototype._addTopEl = function() {
+  this.addTracker('top', function(scrollable) {
     return scrollable.scrollTop;
   });
 };
