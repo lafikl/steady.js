@@ -56,7 +56,7 @@
         <script src="https://gist.github.com/lafikl/79f1ba78ca22cc0f081e.js"></script>
 
         <ul>
-          <li><code>s.addCondition(condition)</code>: it gives the ability to add a condition on the fly. And <code>condition</code> is a string that works as the identifier of the condition (e.g <code>scrollX</code> )</li>
+          <li><code>s.addCondition(condition)</code>: it gives the ability to add a condition on the fly. And <code>condition</code> is a string that works as the identifier of the condition (e.g <code>top</code> )</li>
           <li><code>s.removeCondition(condition)</code>: same as the above but it removes the condition.</li>
           <li><code>s.addTracker(conditionName, fn)</code>: a method to create custom trackers. look at the example <a href="#customTracker">below</a></li>
           <li><code>s.stop</code>: it removes the onScroll listener, this method is good for Single-Page applications whin switching between routes/views.</li>
@@ -125,6 +125,15 @@
 
       <h4>Download</h4>
       <p>You can download the source code from <a href="https://github.com/lafikl/steady.js/archive/master.zip">the github repo</a></p>
+    </div>
+
+    <div class="st-part" id="install">
+      <h2 class="st-part__title">Changelog</h2>
+      <h4>1.0.0</h4>
+      <ul>
+        <li>Deprecating <code>scrollY</code>, <code>scrollX</code>, and <code>scrollTop</code></li>
+        <li>New tracker <code>top</code></li>
+      </ul>
     </div>
 
     <div class="st-part">
