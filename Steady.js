@@ -45,18 +45,29 @@ Steady.prototype.addTracker  = function(name, fn) {
 };
 
 Steady.prototype._addScrollX = function() {
-  this.addTracker('scrollX', function(window) {
-    return window.scrollX;
+  this.addTracker('scrollX', function(scrollable) {
+    return scrollable.scrollX;
   });
 };
 Steady.prototype._addScrollY = function() {
-  this.addTracker('scrollY', function(window) {
-    return window.scrollY;
+  this.addTracker('scrollY', function(scrollable) {
+    return scrollable.scrollY;
+  });
+};
+
+Steady.prototype._addScrollX = function() {
+  this.addTracker('scrollX', function(scrollable) {
+    return scrollable.scrollX;
+  });
+};
+Steady.prototype._addScrollY = function() {
+  this.addTracker('scrollY', function(scrollable) {
+    return scrollable.scrollY;
   });
 };
 
 Steady.prototype._addBottom = function() {
-  this.addTracker('bottom', function(window) {
+  this.addTracker('bottom', function(scrollable) {
     var height = Math.max(
       document.body.scrollHeight,
       document.body.offsetHeight, 
@@ -64,38 +75,38 @@ Steady.prototype._addBottom = function() {
       document.documentElement.scrollHeight,
       document.documentElement.offsetHeight
     );
-    return height - (window.pageYOffset + window.innerHeight);
+    return height - (scrollable.pageYOffset + scrollable.innerHeight);
   });
 };
 
 Steady.prototype._addBottomEl = function() {
   var self = this;
-  this.addTracker('bottom', function(window) {
+  this.addTracker('bottom', function(scrollable) {
     var height = Math.max(
-      self.scrollElement.scrollHeight,
-      self.scrollElement.offsetHeight
+      scrollable.scrollHeight,
+      scrollable.offsetHeight
     );
-    return height - ( self.scrollElement.scrollTop + self.scrollElement.offsetHeight);
+    return height - ( scrollable.scrollTop + scrollable.offsetHeight);
   });
 };
 
 Steady.prototype._addScrollTop = function() {
   var self = this;
-  this.addTracker('scrollTop', function(window) {
-    return self.scrollElement.scrollTop;
+  this.addTracker('scrollTop', function(scrollable) {
+    return scrollable.scrollTop;
   });
 };
 
 Steady.prototype._addScrollLeft = function() {
   var self = this;
-  this.addTracker('scrollLeft', function(window) {
-    return self.scrollElement.scrollLeft;
+  this.addTracker('scrollLeft', function(scrollable) {
+    return scrollable.scrollLeft;
   });
 };
 
 Steady.prototype._addWidth = function() {
-  this.addTracker('width', function(window) {
-    return window.innerWidth;
+  this.addTracker('width', function(scrollable) {
+    return scrollable.innerWidth;
   });
 };
 
@@ -171,7 +182,7 @@ Steady.prototype._throttledHandler = function() {
 
       if ( !self.tracked[self._wantedTrackers[i]] ) continue;
 
-      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(window);
+      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(self.scrollElement || window);
     }
     
     window.requestAnimationFrame(self._check.bind(self));
