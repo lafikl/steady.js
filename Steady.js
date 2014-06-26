@@ -16,7 +16,7 @@ function Steady(opts) {
 
   this._parse();
 
-  if ( 'scrollY' in this.scrollElement ) {
+  if ( 'pageYOffset' in this.scrollElement ) {
     this._addBottom();
     this._addScrollX();
     this._addScrollY();
@@ -64,7 +64,7 @@ Steady.prototype._addBottom = function() {
       document.documentElement.scrollHeight,
       document.documentElement.offsetHeight
     );
-    return height - (window.scrollY + window.innerHeight);
+    return height - (window.pageYOffset + window.innerHeight);
   });
 };
 
