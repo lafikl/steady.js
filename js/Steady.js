@@ -11,12 +11,12 @@ function Steady(opts) {
   this.success   = false;
   this.throttleVal = opts.throttle || 100;
   this.processing = false;
+  this.stopped = false;
 
 
   this._parse();
 
-  if ( this.scrollElement.hasOwnProperty('scrollY') ) {
-    console.log('hiii');
+  if ( 'scrollY' in this.scrollElement ) {
     this._addBottom();
     this._addScrollX();
     this._addScrollY();
@@ -34,6 +34,10 @@ function Steady(opts) {
 
 Steady.prototype.addCondition = function(name, value) {
   this.conditions[name] = value;
+  this._parse();
+};
+Steady.prototype.removeCondition = function(name) {
+  delete this.conditions[name];
   this._parse();
 };
 Steady.prototype.addTracker  = function(name, fn) {
@@ -153,10 +157,13 @@ Steady.prototype._done = function() {
 };
 
 Steady.prototype._onScroll = function() {
-  var self = this;
-  
+  this._onScrollHandler = this._throttledHandler();
+  this.scrollElement.addEventListener('scroll', this._onScrollHandler, false);
+};
 
-  this.scrollElement.onscroll = this.throttle(function(e) {
+Steady.prototype._throttledHandler = function() {
+  var self = this;
+  return this.throttle(function(e) {
 
     if ( !self._wantedTrackers.length || self.processing ) return;
     
@@ -169,7 +176,19 @@ Steady.prototype._onScroll = function() {
     
     window.requestAnimationFrame(self._check.bind(self));
   }, this.throttleVal);
+};
 
+Steady.prototype.stop = function() {
+  if ( ! this.stopped  ) {
+    this.scrollElement.removeEventListener('scroll', this._onScrollHandler, false);
+    this.stopped = true;
+  }
+};
+
+Steady.prototype.resume = function() {
+  if ( this.stopped  ) 
+    this._onScroll();
+    this.stopped = false;
 };
 
 
@@ -194,4 +213,4 @@ Steady.prototype.throttle = function(fn, delay) {
 
 if (typeof module === 'object' && module.exports) {
   module.exports = Steady;
-} 
+}
