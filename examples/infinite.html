@@ -39,8 +39,6 @@
     xhr.open('GET',  link + page);
     xhr.onreadystatechange = function() {
       if ( xhr.readyState == 4 ) {
-
-        console.log('hooo')
         loadingEl.style.display = "none";
         var data = template( { page: page, items: ( JSON.parse(xhr.response) ).items});
         document.body.innerHTML += data;
@@ -55,8 +53,6 @@
     });
 
     s.addCondition('max-bottom', 200);
-    s.addCondition('min-scrollY', 200);
-    s.addCondition('scrollX', 0);
 
     function fn(values, done) {      
       var xhr = new XMLHttpRequest();
