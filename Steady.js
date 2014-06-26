@@ -20,6 +20,8 @@ function Steady(opts) {
     this._addBottom();
     this._addScrollX();
     this._addScrollY();
+    this._addPageYOffset();
+    this._addPageXOffset();
   } else {
     this._addBottomEl();
     this._addScrollTop();
@@ -55,14 +57,14 @@ Steady.prototype._addScrollY = function() {
   });
 };
 
-Steady.prototype._addScrollX = function() {
-  this.addTracker('scrollX', function(scrollable) {
-    return scrollable.scrollX;
+Steady.prototype._addPageXOffset = function() {
+  this.addTracker('pageXOffset', function(scrollable) {
+    return scrollable.pageXOffset;
   });
 };
-Steady.prototype._addScrollY = function() {
-  this.addTracker('scrollY', function(scrollable) {
-    return scrollable.scrollY;
+Steady.prototype._addPageYOffset = function() {
+  this.addTracker('pageYOffset', function(scrollable) {
+    return scrollable.pageYOffset;
   });
 };
 
