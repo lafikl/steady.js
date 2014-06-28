@@ -46,4 +46,14 @@ gulp.task('watch', ['connect', 'serve'], function () {
   gulp.watch('Steady.js', ['scripts']);
 });
 
-gulp.task('default', ['watch']);
+
+gulp.task('build', function() {
+  return gulp.src('Steady.js')
+    .pipe($.uglify())
+    .pipe($.rename('Steady.min.js'))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('test', ['watch']);
+
+gulp.task('default', ['build']);
