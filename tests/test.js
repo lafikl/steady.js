@@ -21,7 +21,6 @@ QUnit.asyncTest('test stop method', function(assert) {
   
   requestAnimationFrame(function() {
 
-    window.scrollTo(0, 205);
 
     setTimeout(function() {
       console.log('vsalllllls', runs);
@@ -32,7 +31,7 @@ QUnit.asyncTest('test stop method', function(assert) {
         QUnit.start();
       }, 200);
 
-    }, 20);
+    }, 10);
   });
 });
 
