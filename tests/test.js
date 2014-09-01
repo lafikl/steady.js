@@ -223,6 +223,58 @@ QUnit.asyncTest('test scrollElement scrollLeft tracker', function(assert) {
 });
 
 
+QUnit.asyncTest('test cross-document', function(assert) {
+    var getFrameDocument = function(frame){
+            return frame.contentDocument || frame.contentWindow.contentDocument;
+        };
+
+    // inject target frame
+    var targetFrame = document.createElement('iframe');
+    targetFrame.style.height = '400px';
+    targetFrame.style.overflow = 'hidden';
+    document.body.appendChild(targetFrame);
+    var targetDocument = getFrameDocument(targetFrame),
+        targetBody = targetDocument.body,
+        paddingDiv = targetDocument.createElement('div');
+    paddingDiv.style.height = '2000px';
+    targetBody.appendChild(paddingDiv);
+
+    // inject caller frame
+    var callerFrame = document.createElement('iframe');
+    callerFrame.style.height = '400px';
+    document.body.appendChild(callerFrame);
+    callerFrame.contentWindow.targetWindow = targetFrame.contentWindow;
+    callerFrame.contentWindow.targetDocument = targetFrame.contentWindow.document;
+    callerFrame.contentWindow.worked = false;
+    var callerHead = getFrameDocument(callerFrame).head;
+
+    // inject steady into caller frame
+    var steady = document.createElement('script');
+    steady.src = '/Steady.js';
+    callerHead.appendChild(steady);
+
+    // inject test helper into caller frame
+    var testScript = document.createElement('script'),
+        scriptContents = 'new Steady({window: targetWindow, scrollElement: targetWindow, conditions: {"min-top": 1}, handler: function(){ worked = true; }});\n';
+    scriptContents += 'targetDocument.body.scrollTop += 600;';
+    testScript.innerHTML = scriptContents;
+
+    setTimeout(function(){
+        callerHead.appendChild(testScript);
+
+        // check caller frame to see if handler was called
+        setTimeout(function(){
+            var handlerWasCalled = callerFrame.contentWindow.worked;
+            callerFrame.parentNode.removeChild(callerFrame);
+            targetFrame.parentNode.removeChild(targetFrame);
+
+            QUnit.start();
+            assert.ok(handlerWasCalled, "Handler should've been called");
+        }, 200);
+    }, 200);
+});
+
+
 
 
 QUnit.testDone(function() {

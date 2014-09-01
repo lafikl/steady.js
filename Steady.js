@@ -3,7 +3,8 @@ function Steady(opts) {
   if ( !opts.handler ) throw new Error('missing handler parameter');
 
 
-  this.scrollElement = opts.scrollElement || window;
+  this.window = opts.window || window;
+  this.scrollElement = opts.scrollElement || this.window;
   this.conditions = opts.conditions || {};
   this.handler   = opts.handler;
   this.values    = {};
@@ -141,7 +142,7 @@ Steady.prototype._check = function() {
     this.processing = true;
 
     var cb = this._done.bind(this);
-    window.requestAnimationFrame(this.handler.bind(this, this.values, cb));
+    this.window.requestAnimationFrame(this.handler.bind(this, this.values, cb));
   }
 };
 
@@ -164,10 +165,10 @@ Steady.prototype._throttledHandler = function() {
 
       if ( !self.tracked[self._wantedTrackers[i]] ) continue;
 
-      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(self.scrollElement || window);
+      self.values[self._wantedTrackers[i]] = self.tracked[self._wantedTrackers[i]].cb(self.scrollElement || self.window);
     }
     
-    window.requestAnimationFrame(self._check.bind(self));
+    self.window.requestAnimationFrame(self._check.bind(self));
   }, this.throttleVal);
 };
 
