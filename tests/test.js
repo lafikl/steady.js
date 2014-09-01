@@ -20,9 +20,6 @@ QUnit.asyncTest('test stop method', function(assert) {
   window.scrollTo(0, 200);
   
   requestAnimationFrame(function() {
-
-
-    setTimeout(function() {
       console.log('vsalllllls', runs);
       s.stop();
       
@@ -31,7 +28,6 @@ QUnit.asyncTest('test stop method', function(assert) {
         QUnit.start();
       }, 200);
 
-    }, 10);
   });
 });
 
@@ -57,22 +53,20 @@ QUnit.asyncTest('test resume method', function(assert) {
 
     s.stop();
     window.scrollTo(0, 300);
+      
+    s.resume();
+      
     setTimeout(function() {
-      
-      s.resume();
-      
+
+      window.scrollTo(0, 310);
+
       setTimeout(function() {
-        
-        window.scrollTo(0, 310);
-        
-        setTimeout(function() {
           assert.equal(runs, 2, 'resume method runs should equal 2' );
           s.stop();
           QUnit.start();
         }, 200);
       }, 200);
 
-    }, 20);
   });
 });
 
