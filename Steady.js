@@ -189,10 +189,16 @@ Steady.prototype.resume = function() {
 // i use it to avoid calling the onscroll function many times.
 Steady.prototype.throttle = function(fn, delay) {
   var timer;
-
+  var isFirstTime = true;
   return function () {
     var context = this;
     var args = arguments;
+
+    if ( isFirstTime ) {
+      fn.apply(context, args);
+      isFirstTime = false;
+      return;
+    }
 
     if ( timer ) return;
 
