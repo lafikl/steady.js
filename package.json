@@ -20,5 +20,11 @@
     "jshint-stylish": "^0.2.0",
     "opn": "^0.1.1",
     "gulp-rename": "^1.2.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lafikl/steady.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lafikl/steady.js/issues"
   }
 }
