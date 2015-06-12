@@ -1,7 +1,6 @@
 {
   "name": "steady",
   "main": "Steady.js",
-  "version": "2.0.0",
   "homepage": "http://lafikl.github.io/steady.js/",
   "authors": [
     "Khalid Lafi"
