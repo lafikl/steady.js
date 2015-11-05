@@ -78,8 +78,9 @@
               <li><code>done</code> (<b>Function</b>): a function that you call when you're done processing, this way you can make sure that your handler can't be called again while you process an async thingy <i>( e.g. waiting for an AJAX request to finish )</i>.</li>
             </ol>
           </li>
-          <li><code>[scrollElement]</code>(<b>HTML Element</b>): it gives you the ability to run Steady on a scrollable element instead of window. This property is optional that defaults to <code>window</code>. <a href="examples/scrollable.html">Demo</a></li>
+          <li><code>[scrollElement]</code>(<b>HTML Element</b>): it gives you the ability to run Steady on a scrollable element instead of <code>window</code>. This property is optional that defaults to <code>options.window</code> (see below). <a href="examples/scrollable.html">Demo</a></li>
           <li><code>[throttle]</code> (<b>Number</b>): the timeout delay in milliseconds, it's used to avoid calling the Steady onscroll handler more than we need to. This property is optional that defaults to 100 ms</li>
+          <li><code>[window]</code> (<b>Window</b>): used in calls to <code>window.requestAnimationFrame</code>, etc. This is helpful if you're using Steady across documents or iframes. his property is optional that defaults to <code>window</code></li>
         </ul>
         
     </div>
